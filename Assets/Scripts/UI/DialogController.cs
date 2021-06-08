@@ -8,6 +8,7 @@ public class DialogController : MonoBehaviour
 {
     [SerializeField] private TMP_Text _storyText;
     [SerializeField] private Button[] _choiceButtons;
+    [SerializeField] private Animator _animator;
 
     Story _story;
 
@@ -21,6 +22,7 @@ public class DialogController : MonoBehaviour
         StringBuilder storyTextBuilder = new StringBuilder();
         while(_story.canContinue) {
             storyTextBuilder.AppendLine(_story.Continue());
+            HandleTags();
         }
 
         _storyText.SetText(storyTextBuilder);
@@ -40,4 +42,12 @@ public class DialogController : MonoBehaviour
         }
     }
 
+    private void HandleTags() {
+        foreach(string tag in _story.currentTags) {
+            if (tag.StartsWith("E.")) {
+                string eventName = tag.Remove(0, 2);
+                GameEvent.RaiseEvent(eventName);
+            }
+        }
+    }
 }
