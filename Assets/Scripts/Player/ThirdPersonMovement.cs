@@ -7,6 +7,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private Rigidbody _rigidBody;
     private Animator _animator;
+    private float _mouseMovement = 0f;
 
     void Awake() {
         _rigidBody = GetComponent<Rigidbody>();
@@ -14,11 +15,14 @@ public class ThirdPersonMovement : MonoBehaviour
     }
 
     void Update() {
-        float mouseMovement = Input.GetAxis("Mouse X");
-        transform.Rotate(0, mouseMovement * Time.deltaTime * _xSensitivity, 0);
+        _mouseMovement += Input.GetAxis("Mouse X");
     }
 
     void FixedUpdate() {
+
+        transform.Rotate(0, _mouseMovement * Time.fixedDeltaTime * _xSensitivity, 0);
+        _mouseMovement = 0f;
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         if (Input.GetKey(KeyCode.LeftShift)) {
