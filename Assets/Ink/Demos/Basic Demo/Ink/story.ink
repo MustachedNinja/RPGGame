@@ -1,21 +1,18 @@
-- I looked at Monsieur Fogg 
-*   ... OPEN SESAME #E.OpenOrangeDoor
-    \*the door creaks open\*
-*   ... and I could contain myself no longer.
-    'What is the purpose of our journey, Monsieur?'
-    'A wager,' he replied.
-    * *     'A wager!'[] I returned.
-            He nodded. 
-            * * *   'But surely that is foolishness!'
-            * * *  'A most serious matter then!'
-            - - -   He nodded again.
-            * * *   'But can we win?'
-                    'That is what we will endeavour to find out,' he answered.
-            * * *   'A modest wager, I trust?'
-                    'Twenty thousand pounds,' he replied, quite flatly.
-            * * *   I asked nothing further of him then[.], and after a final, polite cough, he offered nothing more to me. <>
-    * *     'Ah[.'],' I replied, uncertain what I thought.
-    - -     After that, <>
-*   ... but I said nothing[] and <>
-- we passed the day in silence.
+Listen, they make a big thing of the ship's cybernetics.
+A new generation of Sirius Cybernetics Corporation robots and computers, with the new GPP feature.
+* GPP feature? What is it?
+    - Oh, Genuine People Personalities.
+    * Sounds ghastly
+    - It is. Absolutely ghastly. Just don't event talk about it. Look at this door.
+    #E.ShowOrangeDoor
+    * Can it be avoided? -> instructions
+    All the doors in this spaceship have a cheerful and sunny disposition.
+    It is their pleasure to open for you, and their satisfation to close again with the knowledge of a job well done.
+    
+    == instructions ==
+    - You can turn of the GPP in the back room.#E.ShowBackRoom
+    * Why can't you do that?
+    Brain the size of a planet and you want me to press panels.->END
+    
+    
 - -> END

@@ -8,14 +8,20 @@ public class DialogController : MonoBehaviour
 {
     [SerializeField] private TMP_Text _storyText;
     [SerializeField] private Button[] _choiceButtons;
-    [SerializeField] private Animator _animator;
 
+    private CanvasGroup _canvasGroup;
     Story _story;
+
+    private void Awake() {
+        _canvasGroup = GetComponent<CanvasGroup>();
+        ToggleCanvasOff();
+    }
 
     [ContextMenu("Start Dialog")]
     public void StartDialog(TextAsset dialog) {
         _story = new Story(dialog.text);
         RefreshView();
+        ToggleCanvasOn();
     }
 
     private void RefreshView() {
@@ -27,6 +33,14 @@ public class DialogController : MonoBehaviour
 
         _storyText.SetText(storyTextBuilder);
 
+        if (_story.currentChoices.Count == 0) {
+            ToggleCanvasOff();
+        } else {
+            ShowChoiceButtons();
+        }
+    }
+
+    private void ShowChoiceButtons() {
         for (int i = 0; i < _choiceButtons.Length; i++) {
             Button button = _choiceButtons[i];
             button.onClick.RemoveAllListeners();
@@ -49,5 +63,17 @@ public class DialogController : MonoBehaviour
                 GameEvent.RaiseEvent(eventName);
             }
         }
+    }
+
+    private void ToggleCanvasOn() {
+        _canvasGroup.alpha = 0.5f;
+        _canvasGroup.interactable = true;
+        _canvasGroup.blocksRaycasts = true;
+    }
+
+    private void ToggleCanvasOff() {
+        _canvasGroup.alpha = 0f;
+        _canvasGroup.interactable = false;
+        _canvasGroup.blocksRaycasts = false;
     }
 }
