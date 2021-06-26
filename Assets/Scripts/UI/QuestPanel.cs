@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System;
 
-public class QuestPanel : MonoBehaviour
+public class QuestPanel : ToggleablePanel
 {
     [SerializeField] private Quest _selectedQuest;
     [SerializeField] private Step _selectedStep;
@@ -21,8 +21,9 @@ public class QuestPanel : MonoBehaviour
         _nameText.SetText(_selectedQuest.DisplayName);
         _descriptionText.SetText(_selectedQuest.Description);
         _iconImage.sprite = _selectedQuest.Sprite;
-        
+
         DisplayStepInstructions();
+        Show();
     }
 
     private void DisplayStepInstructions() {
@@ -36,5 +37,10 @@ public class QuestPanel : MonoBehaviour
             }
         }
         _currentObjectivesText.SetText(builder.ToString());
+    }
+
+    public void SelectQuest(Quest quest) {
+        _selectedQuest = quest;
+        Bind();
     }
 }
