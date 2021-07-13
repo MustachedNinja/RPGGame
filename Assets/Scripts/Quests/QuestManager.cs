@@ -29,4 +29,10 @@ public class QuestManager : MonoBehaviour
             Debug.Log($"Missing quest {questName}");
         }
     }
+
+    public void ProgressQuests() {
+        foreach(Quest quest in _activeQuests) {
+            quest.TryProgress();
+        }
+    }
 }
