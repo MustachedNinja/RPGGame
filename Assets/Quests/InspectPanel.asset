@@ -17,13 +17,21 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: bb160ab818cea664fbac303919b70ba6, type: 3}
   _notes: Need to develop second step
   Steps:
+  - _instructions: Investigate broken panels
+    Objectives:
+    - _objectiveType: 0
+      _gameFlag: {fileID: 11400000, guid: 271dbec27558d5b4a8d6f5cb2f789b53, type: 2}
+      _requiredCount: 3
   - _instructions: Go look at the panel
     Objectives:
     - _objectiveType: 0
       _gameFlag: {fileID: 11400000, guid: 718e4588fc8a96f418de6e99cf47f022, type: 2}
+      _requiredCount: 0
     - _objectiveType: 0
       _gameFlag: {fileID: 11400000, guid: 33481ed2fdcc3784096c745a93bcea99, type: 2}
+      _requiredCount: 0
   - _instructions: Go look at door
     Objectives:
     - _objectiveType: 0
       _gameFlag: {fileID: 11400000, guid: 0a3983be0f2341a488fadeabf173204f, type: 2}
+      _requiredCount: 0

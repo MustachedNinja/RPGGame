@@ -24,30 +24,38 @@ public class Quest : ScriptableObject
     public Sprite Sprite => _sprite;
     public Step CurrentStep => Steps[_currentStepIndex];
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         _currentStepIndex = 0;
-        foreach(var step in Steps) {
-            foreach(var objective in step.Objectives) {
-                if (objective.GameFlag != null) {
+        foreach (var step in Steps)
+        {
+            foreach (var objective in step.Objectives)
+            {
+                if (objective.GameFlag != null)
+                {
                     objective.GameFlag.Changed += HandleFlagChanged;
                 }
             }
         }
     }
 
-    public void TryProgress() {
+    public void TryProgress()
+    {
         Step currentStep = GetCurrentStep();
-        if (currentStep.HasAllObjectivesCompleted()) {
+        if (currentStep.HasAllObjectivesCompleted())
+        {
             _currentStepIndex++;
             Changed?.Invoke();
         }
     }
 
-    private Step GetCurrentStep() {
+    private Step GetCurrentStep()
+    {
         return Steps[_currentStepIndex];
     }
 
-    private void HandleFlagChanged() {
+    private void HandleFlagChanged()
+    {
         TryProgress();
         Changed?.Invoke();
     }
@@ -55,49 +63,82 @@ public class Quest : ScriptableObject
 }
 
 [Serializable]
-public class Step {
+public class Step
+{
 
     [SerializeField] private string _instructions;
     public List<Objective> Objectives;
     public string Instructions => _instructions;
 
-    public bool HasAllObjectivesCompleted() {
+    public bool HasAllObjectivesCompleted()
+    {
         return Objectives.TrueForAll(objective => objective.IsCompleted);
     }
 }
 
 [Serializable]
-public class Objective {
+public class Objective
+{
 
     [SerializeField] private ObjectiveType _objectiveType;
 
     [SerializeField] private GameFlag _gameFlag;
 
+    [Header("Int Game Flags")]
+    [Tooltip("Required amount for IntGameFlag")]
+    [SerializeField] private float _requiredCount;
+
     public GameFlag GameFlag => _gameFlag;
 
-    public bool IsCompleted { 
-        get {
-            switch(_objectiveType) {
-                case ObjectiveType.Flag:
-                    return _gameFlag.Value;
-                
-                default:
-                    return false;
-            }
-        } 
-    }
-
-    public enum ObjectiveType {
+    public enum ObjectiveType
+    {
         Flag,
         Item,
         Kill
     }
 
-    public override string ToString() {
-        switch(_objectiveType) {
+    public bool IsCompleted
+    {
+        get
+        {
+            switch (_objectiveType)
+            {
+                case ObjectiveType.Flag:
+                    {
+                        if (_gameFlag is BoolGameFlag boolGameFlag)
+                        {
+                            return boolGameFlag.Value;
+                        }
+                        else if (_gameFlag is IntGameFlag intGameFlag)
+                        {
+                            return intGameFlag.Value >= _requiredCount;
+                        }
+                        return false;
+                    }
+                default:
+                    return false;
+            }
+        }
+    }
+
+    public override string ToString()
+    {
+        switch (_objectiveType)
+        {
             case ObjectiveType.Flag:
-                return _gameFlag.name;
+                {
+                    if (_gameFlag is BoolGameFlag boolGameFlag)
+                    {
+                        return boolGameFlag.name;
+                    }
+                    else if (_gameFlag is IntGameFlag intGameFlag)
+                    {
+                        return $"{intGameFlag.name} : {intGameFlag.Value} / {_requiredCount}";
+                    }
+                    return "";
+                }
             default:
+
                 return _objectiveType.ToString();
         }
     }

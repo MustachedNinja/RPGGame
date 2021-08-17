@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameFlagTriggerArea : MonoBehaviour
 {
 
-    [SerializeField] private GameFlag _gameFlag;
+    [SerializeField] private BoolGameFlag _gameFlag;
 
     private void OnTriggerEnter(Collider other) {
         _gameFlag.Set(true);
