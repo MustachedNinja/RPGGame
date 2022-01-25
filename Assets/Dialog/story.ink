@@ -1,5 +1,5 @@
 Listen, they make a big thing of the ship's cybernetics.
-A new generation of Sirius Cybernetics Corporation robots and computers, with the new GPP feature. #F.BrokenPanelsInspected.9
+A new generation of Sirius Cybernetics Corporation robots and computers, with the new GPP feature. #F.DroneSpeed.3.2 #F.DroneName.BondJamesBond
 * GPP feature? What is it?
     - Oh, Genuine People Personalities.
     * Sounds ghastly

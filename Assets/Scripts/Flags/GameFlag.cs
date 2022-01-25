@@ -24,4 +24,9 @@ public abstract class GameFlag<T> : GameFlag
     {
         Value = default;
     }
+
+    public void Set(T value) {
+        Value = value;
+        SendChanged();
+    }
 }

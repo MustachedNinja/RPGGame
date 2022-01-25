@@ -1,10 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Decimal Game Flag")]
+[CreateAssetMenu(menuName = "Game Flag/Decimal")]
 public class DecimalGameFlag : GameFlag<decimal>
 {
-    public void Modify(decimal value) {
-        Value += value;
-        SendChanged();
-    }
 }

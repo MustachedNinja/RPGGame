@@ -1,11 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Bool Game Flag")]
+[CreateAssetMenu(menuName = "Game Flag/Bool")]
 public class BoolGameFlag : GameFlag<bool>
 {
-    public void Set(bool value)
-    {
-        Value = value;
-        SendChanged();
-    }
 }

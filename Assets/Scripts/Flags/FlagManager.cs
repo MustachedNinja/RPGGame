@@ -36,6 +36,21 @@ public class FlagManager : MonoBehaviour
                     intGameFlag.Set(intGameValue);
                 }
             }
+            else if (flag is BoolGameFlag boolGameFlag)
+            {
+                if (bool.TryParse(value, out var boolGameValue)) {
+                    boolGameFlag.Set(boolGameValue);
+                }
+            }
+            else if (flag is DecimalGameFlag decimalGameFlag) {
+                if (decimal.TryParse(value, out var decimalGameValue)) {
+                    decimalGameFlag.Set(decimalGameValue);
+                }
+            }
+            else if (flag is StringGameFlag stringGameFlag)
+            {
+                stringGameFlag.Set(value);
+            }
         }
     }
 }
