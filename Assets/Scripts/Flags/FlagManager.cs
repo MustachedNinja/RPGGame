@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class FlagManager : MonoBehaviour
 {
@@ -22,17 +20,7 @@ public class FlagManager : MonoBehaviour
     }
 
     private void OnValidate() {
-        _allFlags = GetAllInstances<GameFlag>();
-    }
-
-    private static T[] GetAllInstances<T>() where T : ScriptableObject {
-        string[] guids = AssetDatabase.FindAssets("t:"+typeof(T).Name);
-        T[] a = new T[guids.Length];
-        for (int i = 0; i < guids.Length; i++) {
-            string path = AssetDatabase.GUIDToAssetPath(guids[i]);
-            a[i] = AssetDatabase.LoadAssetAtPath<T>(path);
-        }
-        return a;
+        _allFlags = Extensions.GetAllInstances<GameFlag>();
     }
 
     public void Set(string flagName, string value)
