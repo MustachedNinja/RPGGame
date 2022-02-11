@@ -56,4 +56,15 @@ public class FlagManager : MonoBehaviour
             }
         }
     }
+
+    public void Bind(List<GameFlagData> gameFlagDatas) {
+        foreach (GameFlag flag in _allFlags) {
+            GameFlagData data = gameFlagDatas.FirstOrDefault(t => t.Name == flag.name);
+            if (data == null) {
+                data = new GameFlagData() { Name = flag.name };
+                gameFlagDatas.Add(data);
+            }
+            flag.Bind(data);
+        }
+    }
 }

@@ -1,19 +1,9 @@
 using System;
 using UnityEngine;
 
-public abstract class GameFlag : ScriptableObject
-{
-    public event Action Changed;
-
-    protected void SendChanged()
-    {
-        Changed?.Invoke();
-    }
-}
-
 public abstract class GameFlag<T> : GameFlag
 {
-    public T Value { get; protected set; }
+    public T Value { get; private set; }
 
     private void OnEnable()
     {
@@ -27,8 +17,27 @@ public abstract class GameFlag<T> : GameFlag
 
     public void Set(T value) {
         Value = value;
+        GameFlagData.Value = Value.ToString();
         SendChanged();
     }
+}
+
+public abstract class GameFlag : ScriptableObject
+{
+    public GameFlagData GameFlagData { get; private set; }
+    public event Action Changed;
+
+    protected void SendChanged()
+    {
+        Changed?.Invoke();
+    }
+
+    public void Bind(GameFlagData gameFlagData) {
+        this.GameFlagData = gameFlagData;
+        SetFromData(gameFlagData.Value);
+    }
+
+    protected abstract void SetFromData(string value);
 }
 
 [Serializable]
